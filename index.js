@@ -4,9 +4,12 @@ const app = express();
 const port = process.env.PORT;
 
 app.use('/', function (req, res) {
+  const { query, body } = req;
   res.status(200).json({
     method: req.method,
     uri: req.url,
+    query,
+    body,
   })
 });
 
