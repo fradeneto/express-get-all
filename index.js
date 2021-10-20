@@ -1,7 +1,11 @@
 require('dotenv/config');
 const express = require('express');
+const crypto = require('crypto');
+
+const instanceHash = crypto.randomBytes(4).toString('hex');
+
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 80;
 app.use(express.json())
 app.use('/', function (req, res) {
   const { query, body, headers } = req;
@@ -10,6 +14,7 @@ app.use('/', function (req, res) {
   const connSckRemoteAddress = req.connection.socket ? req.connection.socket.remoteAddress : '';
 
   res.status(200).json({
+    instanceHash,
     method: req.method,
     uri: req.url,
     query,
