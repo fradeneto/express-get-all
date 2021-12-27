@@ -3,6 +3,7 @@ const express = require('express');
 const crypto = require('crypto');
 
 const instanceHash = crypto.randomBytes(4).toString('hex');
+var pjson = require('./package.json');
 
 const app = express();
 const port = process.env.PORT || 80;
@@ -15,6 +16,7 @@ app.use('/', function (req, res) {
 
   res.status(200).json({
     instanceHash,
+    version: pjson.version,
     method: req.method,
     uri: req.url,
     query,
