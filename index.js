@@ -28,6 +28,10 @@ app.use('/', function (req, res) {
   })
 });
 
+app.use('/envs', function (req, res) {
+  res.status(200).json(process.env);
+});
+
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
