@@ -7,6 +7,11 @@ var pjson = require('./package.json');
 
 const app = express();
 const port = process.env.PORT || 80;
+
+app.use('/envs', function (req, res) {
+  res.status(200).json(process.env);
+});
+
 app.use(express.json())
 app.use('/', function (req, res) {
   const { query, body, headers } = req;
@@ -26,10 +31,6 @@ app.use('/', function (req, res) {
     socketRemoteAddress,
     connSckRemoteAddress,
   })
-});
-
-app.use('/envs', function (req, res) {
-  res.status(200).json(process.env);
 });
 
 app.listen(port, function () {
